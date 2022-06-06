@@ -9,8 +9,3 @@ edition = "2018"
 
 [dependencies]
 libc = "0.2"
-
-[build-dependencies]
-bindgen = { version = "0.59", optional = true }
-pkg-config = "0.3"
-semver = "1.0"

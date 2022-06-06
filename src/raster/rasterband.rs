@@ -37,7 +37,7 @@ pub enum ResampleAlg {
     Gauss,
 }
 
-fn map_resample_alg(alg: &ResampleAlg) -> u32 {
+fn map_resample_alg(alg: &ResampleAlg) -> c_int {
     match alg {
         ResampleAlg::NearestNeighbour => 0,
         ResampleAlg::Bilinear => 1,

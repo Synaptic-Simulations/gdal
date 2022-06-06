@@ -1,7 +1,9 @@
-/Cargo.lock
-/target
 /.vscode
-/gdal-sys/target
+/.idea
+
+target
+/Cargo.lock
+*.lib
 
 # gtags
 GPATH
