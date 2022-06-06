@@ -16,7 +16,8 @@ fn main() {
             let mut archive = ZipArchive::new(Cursor::new(&data[..])).unwrap();
             let mut data = Vec::new();
             archive.by_index(0).unwrap().read_to_end(&mut data).unwrap();
-            std::fs::write("vendor/gdal.lib", data).unwrap();
+			std::fs::create_dir_all("vendor").unwrap();
+            std::fs::write(gdal_path, data).unwrap();
 
             println!(
                 "cargo:rustc-link-search=native={}",
