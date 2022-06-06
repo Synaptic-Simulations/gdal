@@ -7,5 +7,9 @@ repository = "https://github.com/georust/gdal"
 authors = ["Johannes Drönner <droenner@informatik.uni-marburg.de>"]
 edition = "2018"
 
+[build-dependencies]
+reqwest = { version = "0.11.10", features = ["blocking"] }
+zip = "0.6.2"
+
 [dependencies]
 libc = "0.2"
