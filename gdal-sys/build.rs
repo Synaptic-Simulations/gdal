@@ -3,7 +3,7 @@ use std::path::Path;
 use zip::ZipArchive;
 
 fn main() {
-    if cfg!(windows) {
+    if cfg!(windows) && std::env::var("GDAL_NO_DOWNLOAD").is_none() {
         let gdal_path = Path::new("vendor/gdal.lib");
         if !gdal_path.exists() {
             let data = reqwest::blocking::get(

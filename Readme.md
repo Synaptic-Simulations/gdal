@@ -1,18 +1,12 @@
 # gdal
 
-[![Documentation](https://docs.rs/gdal/badge.svg)](https://docs.rs/gdal)
-![Build Status](https://github.com/georust/gdal/workflows/CI/badge.svg)
+A fork of [https://github.com/georust/gdal]() for our usage.
 
-[GDAL](http://gdal.org/) bindings for [Rust](http://www.rust-lang.org/).
+## Building
+### On Windows
 
-So far, you can:
+Note that the build script automatically downloads a prebuilt zip of gdal. 
+If you don't want it to do so, set the `GDAL_NO_DOWNLOAD` environment variable, and follow the other instructions.
 
-* open a raster dataset for reading/writing
-* get size and number of bands
-* get/set projection and geo-transform
-* read and write raster data
-* warp between datasets
-* read and write vector data
-* access metadata
-
-Many raster and vector functions are not available. Patches welcome :)
+### On not-Windows
+Other platforms do not have prebuilt binaries, so set `GDAL_PATH` to the path of a gdal static library.
