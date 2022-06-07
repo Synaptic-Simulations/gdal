@@ -3,7 +3,7 @@ use std::path::Path;
 use zip::ZipArchive;
 
 fn main() {
-    if cfg!(windows) && std::env::var("GDAL_NO_DOWNLOAD").is_none() {
+    if cfg!(windows) && std::env::var_os("GDAL_NO_DOWNLOAD").is_none() {
         let gdal_path = Path::new("vendor/gdal.lib");
         if !gdal_path.exists() {
             let data = reqwest::blocking::get(
@@ -16,7 +16,7 @@ fn main() {
             let mut archive = ZipArchive::new(Cursor::new(&data[..])).unwrap();
             let mut data = Vec::new();
             archive.by_index(0).unwrap().read_to_end(&mut data).unwrap();
-			std::fs::create_dir_all("vendor").unwrap();
+            std::fs::create_dir_all("vendor").unwrap();
             std::fs::write(gdal_path, data).unwrap();
 
             println!(
