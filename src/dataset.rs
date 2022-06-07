@@ -24,7 +24,6 @@ use gdal_sys::{
 };
 use libc::{c_double, c_int, c_uint};
 
-#[cfg(all(major_ge_3, minor_ge_1))]
 use crate::raster::Group;
 
 use bitflags::bitflags;
