@@ -195,11 +195,6 @@ impl<'a> Default for LayerOptions<'a> {
     }
 }
 
-// GDAL Docs state: The returned dataset should only be accessed by one thread at a time.
-// See: https://gdal.org/api/raster_c_api.html#_CPPv48GDALOpenPKc10GDALAccess
-// Additionally, VRT Datasets are not safe before GDAL 2.3.
-// See: https://gdal.org/drivers/raster/vrt.html#multi-threading-issues
-#[cfg(any(all(major_is_2, minor_ge_3), major_ge_3))]
 unsafe impl Send for Dataset {}
 
 impl Dataset {
@@ -336,13 +331,11 @@ impl Dataset {
         Ok(())
     }
 
-    #[cfg(major_ge_3)]
     /// Get the spatial reference system for this dataset.
     pub fn spatial_ref(&self) -> Result<SpatialRef> {
         unsafe { SpatialRef::from_c_obj(gdal_sys::GDALGetSpatialRef(self.c_dataset)) }
     }
 
-    #[cfg(major_ge_3)]
     /// Set the spatial reference system for this dataset.
     pub fn set_spatial_ref(&mut self, spatial_ref: &SpatialRef) -> Result<()> {
         let rv = unsafe { gdal_sys::GDALSetSpatialRef(self.c_dataset, spatial_ref.to_c_hsrs()) };
@@ -419,7 +412,6 @@ impl Dataset {
     /// You must have opened the dataset with the `GdalOpenFlags::GDAL_OF_MULTIDIM_RASTER`
     /// flag in order for it to work.
     ///
-    #[cfg(all(major_ge_3, minor_ge_1))]
     pub fn root_group(&self) -> Result<Group> {
         unsafe {
             let c_group = gdal_sys::GDALDatasetGetRootGroup(self.c_dataset());
