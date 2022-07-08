@@ -19,12 +19,12 @@ fn main() {
             let mut data = Vec::new();
             archive.by_index(0).unwrap().read_to_end(&mut data).unwrap();
             std::fs::write(&gdal_path, data).unwrap();
-
-            println!(
-                "cargo:rustc-link-search=native={}",
-                out_path.display()
-            );
         }
+		
+		println!(
+            "cargo:rustc-link-search=native={}",
+            out_path.display()
+        );
     } else {
         println!("cargo:rerun-if-env-changed=GDAL_PATH");
         let path = std::env::var("GDAL_PATH")
